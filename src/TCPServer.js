@@ -19,6 +19,11 @@ module.exports.createTCPServer = function (servicePort, callback) {
         data,
       ]);
 
+      if (connectionContext.bufferOutput.length > 0) {
+        connection.write(connectionContext.bufferOutput);
+        connectionContext.bufferOutput = Buffer.alloc(0);
+      }
+
       callback(connectionContext);
     });
 
