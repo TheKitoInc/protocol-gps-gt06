@@ -1,0 +1,14 @@
+{
+  "name": "js-node-service-concox",
+  "version": "1.0.0",
+  "description": "js-node-service-concox",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "minimist": "^1.2.8"
+  }
+}
