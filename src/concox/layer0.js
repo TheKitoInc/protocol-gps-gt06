@@ -60,8 +60,6 @@ module.exports.removeLayer0 = function (package) {
   } else if (header.equals(packageHeaderB)) {
     size = package.subarray(0, 2).readUInt16LE();
     package = package.subarray(2);
-  } else {
-    throw new Error("Invalid Header: " + header);
   }
 
   size = size - 2; // -2 CRC16
