@@ -2,7 +2,10 @@ const packageHeaderA = Buffer.from("\x78\x78");
 const packageHeaderB = Buffer.from("\x79\x79");
 const packageFooter = Buffer.from("\x0D\x0A");
 const { crc16, Crc16Algorithms } = require("easy-crc");
-
+const isExtendedProtocol = function (package) {
+  header = package.subarray(0, packageHeaderB.length);
+  return packageHeaderB.equals(header);
+};
 const extractFooter = function (package) {
   let footer = package.subarray(-packageFooter.length);
 
@@ -50,11 +53,12 @@ module.exports.removeLayer0 = function (package) {
   package = extractFooter(package);
 
   let header = package.subarray(0, 2);
+  let extendedProtocol = isExtendedProtocol(package);
   package = extractHeader(package);
 
   package = extractChecksum(package);
   let size = null;
-  if (header.equals(packageHeaderA)) {
+  if (!extendedProtocol) {
     size = package.subarray(0, 1).readUInt8();
     package = package.subarray(1);
   } else {
