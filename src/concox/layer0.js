@@ -1,5 +1,12 @@
 const packageHeaderA = Buffer.from("\x78\x78");
 const packageHeaderB = Buffer.from("\x79\x79");
+const { crc16, Crc16Algorithms } = require("easy-crc");
+const calcChecksum = function (data) {
+  let buffer = Buffer.alloc(2);
+  buffer.writeUInt16LE(crc16("X-25", data));
+  return buffer;
+};
+
 module.exports.removeLayer0 = function (package) {
   let header = package.subarray(0, 2);
   package = package.subarray(2);
