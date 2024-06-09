@@ -51,12 +51,11 @@ const calcChecksum = function (data) {
 
 module.exports.removeLayer0 = function (package) {
   package = extractFooter(package);
-
   let header = package.subarray(0, 2);
   let extendedProtocol = isExtendedProtocol(package);
   package = extractHeader(package);
-
   package = extractChecksum(package);
+
   let size = null;
   if (!extendedProtocol) {
     size = package.subarray(0, 1).readUInt8();
