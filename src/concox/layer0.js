@@ -1,11 +1,14 @@
 const packageHeaderA = Buffer.from("\x78\x78");
 const packageHeaderB = Buffer.from("\x79\x79");
 const packageFooter = Buffer.from("\x0D\x0A");
-const { crc16, Crc16Algorithms } = require("easy-crc");
+
+const { crc16 } = require("easy-crc");
+
 const isExtendedProtocol = function (package) {
   header = package.subarray(0, packageHeaderB.length);
   return packageHeaderB.equals(header);
 };
+
 const extractFooter = function (package) {
   let footer = package.subarray(-packageFooter.length);
 
