@@ -57,7 +57,7 @@ module.exports.removeLayer0 = function (package) {
   if (header.equals(packageHeaderA)) {
     size = package.subarray(0, 1).readUInt8();
     package = package.subarray(1);
-  } else if (header.equals(packageHeaderB)) {
+  } else {
     size = package.subarray(0, 2).readUInt16LE();
     package = package.subarray(2);
   }
