@@ -22,6 +22,7 @@ module.exports.removeLayer0 = function (package) {
     throw new Error("Invalid Header: " + header);
   }
 
+  size = size - 2; // -2 CRC16
   if (package.length != size) {
     throw new Error("Invalid Size: " + size);
   }
@@ -32,14 +33,16 @@ module.exports.removeLayer0 = function (package) {
 module.exports.addLayer0 = function (package) {
   let header = null;
   let size = null;
-  if (package.length < 256) {
+  let sizeInt = package.length + 2; // +2 (CRC16)
+
+  if (sizeInt < 256) {
     header = packageHeaderA;
     size = Buffer.alloc(1);
-    size.writeUInt8(package.length);
+    size.writeUInt8(sizeInt);
   } else {
     header = packageHeaderB;
     size = Buffer.alloc(2);
-    size.writeUInt16LE(package.length);
+    size.writeUInt16LE(sizeInt);
   }
 
   return Buffer.concat([header, size, package]);
