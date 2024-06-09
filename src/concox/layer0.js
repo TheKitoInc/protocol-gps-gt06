@@ -13,6 +13,22 @@ const extractFooter = function (package) {
   return package.subarray(0, -packageFooter.length);
 };
 
+const extractHeader = function (package) {
+  let header = null;
+
+  header = package.subarray(0, packageHeaderA.length);
+  if (packageHeaderA.equals(header)) {
+    return package.subarray(packageHeaderA.length);
+  }
+
+  header = package.subarray(0, packageHeaderB.length);
+  if (packageHeaderB.equals(header)) {
+    return package.subarray(packageHeaderB.length);
+  }
+
+  throw new Error("Invalid packageHeader: " + package);
+};
+
 const calcChecksum = function (data) {
   let buffer = Buffer.alloc(2);
   buffer.writeUInt16LE(crc16("X-25", data));
@@ -23,7 +39,7 @@ module.exports.removeLayer0 = function (package) {
   package = extractFooter(package);
 
   let header = package.subarray(0, 2);
-  package = package.subarray(2);
+  package = extractHeader(package);
 
   let size = null;
   if (header.equals(packageHeaderA)) {
