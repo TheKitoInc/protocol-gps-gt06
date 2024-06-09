@@ -8,16 +8,13 @@ module.exports.buffer2packages = function (
 
   while (bufferIndex > -1) {
     connectionContext.packages.push(
-      connectionContext.bufferInput.subarray(
-        0,
-        bufferIndex 
-      )
+      connectionContext.bufferInput.subarray(0, bufferIndex)
     );
 
     connectionContext.bufferInput = connectionContext.bufferInput.subarray(
       bufferIndex + packageSeparator.length
     );
-    
+
     bufferIndex = connectionContext.bufferInput.indexOf(packageSeparator);
   }
 };
