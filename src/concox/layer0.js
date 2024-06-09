@@ -45,7 +45,7 @@ const extractChecksum = function (package) {
 
 const calcChecksum = function (data) {
   let buffer = Buffer.alloc(2);
-  buffer.writeUInt16LE(crc16("X-25", data));
+  buffer.writeUInt16BE(crc16("X-25", data));
   return buffer;
 };
 
