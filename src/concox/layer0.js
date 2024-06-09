@@ -1,6 +1,18 @@
 const packageHeaderA = Buffer.from("\x78\x78");
 const packageHeaderB = Buffer.from("\x79\x79");
+const packageFooter = Buffer.from("\x0D\x0A");
 const { crc16, Crc16Algorithms } = require("easy-crc");
+
+const extractFooter = function (package) {
+  let footer = package.subarray(-packageFooter.length);
+
+  if (!packageFooter.equals(footer)) {
+    throw new Error("Invalid packageFooter: " + footer);
+  }
+
+  return package.subarray(0, -packageFooter.length);
+};
+
 const calcChecksum = function (data) {
   let buffer = Buffer.alloc(2);
   buffer.writeUInt16LE(crc16("X-25", data));
@@ -8,6 +20,8 @@ const calcChecksum = function (data) {
 };
 
 module.exports.removeLayer0 = function (package) {
+  package = extractFooter(package);
+
   let header = package.subarray(0, 2);
   package = package.subarray(2);
 
@@ -45,5 +59,8 @@ module.exports.addLayer0 = function (package) {
     size.writeUInt16LE(sizeInt);
   }
 
-  return Buffer.concat([header, size, package]);
+  package = Buffer.concat([size, package]);
+  let checksum = calcChecksum(package);
+
+  return Buffer.concat([header, package, checksum, packageFooter]);
 };
