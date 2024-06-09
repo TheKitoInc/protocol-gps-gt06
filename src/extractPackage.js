@@ -1,4 +1,4 @@
-module.exports.buffer2packages = function (buffer, packageSeparator, callback) {
+module.exports.extractPackage = function (buffer, packageSeparator, callback) {
   let bufferIndex = buffer.indexOf(packageSeparator);
 
   while (bufferIndex > -1) {
