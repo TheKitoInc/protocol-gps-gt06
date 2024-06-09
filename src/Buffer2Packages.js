@@ -1,20 +1,11 @@
-module.exports.buffer2packages = function (
-  connectionContext,
-  packageSeparator
-) {
-  connectionContext.packages = connectionContext.packages || [];
-
-  let bufferIndex = connectionContext.bufferInput.indexOf(packageSeparator);
+module.exports.buffer2packages = function (buffer, packageSeparator, callback) {
+  let bufferIndex = buffer.indexOf(packageSeparator);
 
   while (bufferIndex > -1) {
-    connectionContext.packages.push(
-      connectionContext.bufferInput.subarray(0, bufferIndex)
-    );
+    callback(buffer.subarray(0, bufferIndex));
 
-    connectionContext.bufferInput = connectionContext.bufferInput.subarray(
-      bufferIndex + packageSeparator.length
-    );
+    buffer = buffer.subarray(bufferIndex + packageSeparator.length);
 
-    bufferIndex = connectionContext.bufferInput.indexOf(packageSeparator);
+    bufferIndex = buffer.indexOf(packageSeparator);
   }
 };
