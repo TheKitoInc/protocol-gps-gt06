@@ -1,12 +1,12 @@
-module.exports.parseLogin = function (package) {
-  let imei = package.subarray(0, 8);
-  package = package.subarray(8);
+module.exports.parse = function (buffer) {
+  let imei = buffer.subarray(0, 8);
+  buffer = buffer.subarray(8);
 
-  let type = package.subarray(0, 2);
-  package = package.subarray(2);
+  let type = buffer.subarray(0, 2);
+  buffer = buffer.subarray(2);
 
-  let tz = package.subarray(0, 2);
-  package = package.subarray(2);
+  let tz = buffer.subarray(0, 2);
+  buffer = buffer.subarray(2);
 
   return {
     imei: imei.toString("hex"),
@@ -15,16 +15,16 @@ module.exports.parseLogin = function (package) {
   };
 };
 
-function getTimeZone(package) {
-  package = package.toString("hex");
+function getTimeZone(buffer) {
+  buffer = buffer.toString("hex");
 
-  let timeBytes = Buffer.from("0" + package.slice(0, 3), "hex");
+  let timeBytes = Buffer.from("0" + buffer.slice(0, 3), "hex");
   let timeInt = timeBytes.readUInt16BE();
   let timeString = timeInt.toString();
   let timeMinutes =
     parseInt(timeString.slice(0, -2)) * 60 + parseInt(timeString.slice(-2));
 
-  let byteFlags = Buffer.from("0" + package.slice(3, 4), "hex");
+  let byteFlags = Buffer.from("0" + buffer.slice(3, 4), "hex");
 
   return byteFlags.readUInt8() > 7 ? -timeMinutes : timeMinutes;
 }
