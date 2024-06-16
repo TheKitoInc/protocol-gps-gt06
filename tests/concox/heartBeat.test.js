@@ -19,10 +19,10 @@ describe("heartBeat", () => {
     expect(parse(testData).defense).toStrictEqual(true);
   });
 
-  test("Test login package cellularSignal -", () => {
+  test("Test login package batteryVoltage -", () => {
     expect(parse(testData).batteryVoltage).toStrictEqual(4);
   });
-  test("Test login package cellularSignal -", () => {
+  test("Test login package cellularSignal", () => {
     expect(parse(testData).cellularSignal).toStrictEqual(4);
   });
 });
