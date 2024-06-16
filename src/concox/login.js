@@ -1,12 +1,7 @@
+const { parserPackageComponents } = require("./common");
+
 module.exports.parse = function (buffer) {
-  let imei = buffer.subarray(0, 8);
-  buffer = buffer.subarray(8);
-
-  let type = buffer.subarray(0, 2);
-  buffer = buffer.subarray(2);
-
-  let tz = buffer.subarray(0, 2);
-  buffer = buffer.subarray(2);
+  let [imei, type, tz] = parserPackageComponents(buffer, [8, 2, 2]);
 
   return {
     imei: imei.toString("hex"),
