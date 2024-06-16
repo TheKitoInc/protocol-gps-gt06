@@ -3,6 +3,7 @@ const packageHeaderB = Buffer.from([0x79, 0x79]);
 const packageFooter = Buffer.from([0x0d, 0x0a]);
 
 const { crc16 } = require("easy-crc");
+const { throwError } = require("./common");
 
 const isExtendedProtocol = function (buffer) {
   header = buffer.subarray(0, packageHeaderB.length);
@@ -13,7 +14,7 @@ const extractFooter = function (buffer) {
   let footer = buffer.subarray(-packageFooter.length);
 
   if (!packageFooter.equals(footer)) {
-    throw new Error("Invalid packageFooter: " + footer);
+    throwError("Invalid packageFooter", buffer);
   }
 
   return buffer.subarray(0, -packageFooter.length);
@@ -32,7 +33,7 @@ const extractHeader = function (buffer) {
     return buffer.subarray(packageHeaderB.length);
   }
 
-  throw new Error("Invalid packageHeader: " + buffer.toString("HEX"));
+  throwError("Invalid packageHeader", buffer);
 };
 
 const extractChecksum = function (buffer) {
@@ -40,7 +41,7 @@ const extractChecksum = function (buffer) {
   buffer = buffer.subarray(0, -2);
 
   if (!calcChecksum(buffer).equals(checksum)) {
-    throw new Error("Invalid packageChecksum: " + checksum.toString("hex"));
+    throwError("Invalid packageChecksum", buffer);
   }
 
   return buffer;
@@ -51,6 +52,8 @@ const calcChecksum = function (data) {
   buffer.writeUInt16BE(crc16("X-25", data));
   return buffer;
 };
+
+
 
 module.exports.removeLayer0 = function (buffer) {
   let extendedProtocol = isExtendedProtocol(buffer);
@@ -69,7 +72,7 @@ module.exports.removeLayer0 = function (buffer) {
 
   size = size - 2; // -2 CRC16
   if (buffer.length != size) {
-    throw new Error("Invalid Size: " + size);
+    throwError("Invalid packageSize", buffer);
   }
 
   return buffer;
