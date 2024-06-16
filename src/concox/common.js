@@ -11,6 +11,9 @@ module.exports.parserPackageComponents = function (buffer, map) {
     output.push(value);
   });
 
+  if(buffer.length !=0)
+    exports.throwError('Map Invalid', buffer)
+
   return output;
 };
 
