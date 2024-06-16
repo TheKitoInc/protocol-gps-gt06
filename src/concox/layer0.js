@@ -1,49 +1,49 @@
-const packageHeaderA = Buffer.from("\x78\x78");
-const packageHeaderB = Buffer.from("\x79\x79");
-const packageFooter = Buffer.from("\x0D\x0A");
+const packageHeaderA = Buffer.from([0x78, 0x78]);
+const packageHeaderB = Buffer.from([0x79, 0x79]);
+const packageFooter = Buffer.from([0x0d, 0x0a]);
 
 const { crc16 } = require("easy-crc");
 
-const isExtendedProtocol = function (package) {
-  header = package.subarray(0, packageHeaderB.length);
+const isExtendedProtocol = function (packageBuffer) {
+  header = packageBuffer.subarray(0, packageHeaderB.length);
   return packageHeaderB.equals(header);
 };
 
-const extractFooter = function (package) {
-  let footer = package.subarray(-packageFooter.length);
+const extractFooter = function (packageBuffer) {
+  let footer = packageBuffer.subarray(-packageFooter.length);
 
   if (!packageFooter.equals(footer)) {
     throw new Error("Invalid packageFooter: " + footer);
   }
 
-  return package.subarray(0, -packageFooter.length);
+  return packageBuffer.subarray(0, -packageFooter.length);
 };
 
-const extractHeader = function (package) {
+const extractHeader = function (packageBuffer) {
   let header = null;
 
-  header = package.subarray(0, packageHeaderA.length);
+  header = packageBuffer.subarray(0, packageHeaderA.length);
   if (packageHeaderA.equals(header)) {
-    return package.subarray(packageHeaderA.length);
+    return packageBuffer.subarray(packageHeaderA.length);
   }
 
-  header = package.subarray(0, packageHeaderB.length);
+  header = packageBuffer.subarray(0, packageHeaderB.length);
   if (packageHeaderB.equals(header)) {
-    return package.subarray(packageHeaderB.length);
+    return packageBuffer.subarray(packageHeaderB.length);
   }
 
-  throw new Error("Invalid packageHeader: " + package);
+  throw new Error("Invalid packageHeader: " + packageBuffer);
 };
 
-const extractChecksum = function (package) {
-  let checksum = package.subarray(-2);
-  package = package.subarray(0, -2);
+const extractChecksum = function (packageBuffer) {
+  let checksum = packageBuffer.subarray(-2);
+  packageBuffer = packageBuffer.subarray(0, -2);
 
-  if (!calcChecksum(package).equals(checksum)) {
-    throw new Error("Invalid packageChecksum: " + footer);
+  if (!calcChecksum(packageBuffer).equals(checksum)) {
+    throw new Error("Invalid packageChecksum: " + checksum.toString("hex"));
   }
 
-  return package;
+  return packageBuffer;
 };
 
 const calcChecksum = function (data) {
@@ -52,33 +52,33 @@ const calcChecksum = function (data) {
   return buffer;
 };
 
-module.exports.removeLayer0 = function (package) {
-  let extendedProtocol = isExtendedProtocol(package);
-  package = extractHeader(package);
-  package = extractFooter(package);
-  package = extractChecksum(package);
+module.exports.removeLayer0 = function (packageBuffer) {
+  let extendedProtocol = isExtendedProtocol(packageBuffer);
+  packageBuffer = extractHeader(packageBuffer);
+  packageBuffer = extractFooter(packageBuffer);
+  packageBuffer = extractChecksum(packageBuffer);
 
   let size = null;
   if (!extendedProtocol) {
-    size = package.subarray(0, 1).readUInt8();
-    package = package.subarray(1);
+    size = packageBuffer.subarray(0, 1).readUInt8();
+    packageBuffer = packageBuffer.subarray(1);
   } else {
-    size = package.subarray(0, 2).readUInt16LE();
-    package = package.subarray(2);
+    size = packageBuffer.subarray(0, 2).readUInt16BE();
+    packageBuffer = packageBuffer.subarray(2);
   }
 
   size = size - 2; // -2 CRC16
-  if (package.length != size) {
+  if (packageBuffer.length != size) {
     throw new Error("Invalid Size: " + size);
   }
 
-  return package;
+  return packageBuffer;
 };
 
-module.exports.addLayer0 = function (package) {
+module.exports.addLayer0 = function (packageBuffer) {
   let header = null;
   let size = null;
-  let sizeInt = package.length + 2; // +2 (CRC16)
+  let sizeInt = packageBuffer.length + 2; // +2 (CRC16)
 
   if (sizeInt < 256) {
     header = packageHeaderA;
@@ -87,11 +87,11 @@ module.exports.addLayer0 = function (package) {
   } else {
     header = packageHeaderB;
     size = Buffer.alloc(2);
-    size.writeUInt16LE(sizeInt);
+    size.writeUInt16BE(sizeInt);
   }
 
-  package = Buffer.concat([size, package]);
-  let checksum = calcChecksum(package);
+  packageBuffer = Buffer.concat([size, packageBuffer]);
+  let checksum = calcChecksum(packageBuffer);
 
-  return Buffer.concat([header, package, checksum, packageFooter]);
+  return Buffer.concat([header, packageBuffer, checksum, packageFooter]);
 };
