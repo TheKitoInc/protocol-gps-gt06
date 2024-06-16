@@ -1,5 +1,3 @@
-const { randomBytes } = require("crypto");
-const { addLayer0, removeLayer0 } = require("../../src/concox/layer0");
 const { parse } = require("../../src/concox/login");
 //65534
 describe("login", () => {
