@@ -32,7 +32,7 @@ const extractHeader = function (buffer) {
     return buffer.subarray(packageHeaderB.length);
   }
 
-  throw new Error("Invalid packageHeader: " + buffer);
+  throw new Error("Invalid packageHeader: " + buffer.toString("HEX"));
 };
 
 const extractChecksum = function (buffer) {
