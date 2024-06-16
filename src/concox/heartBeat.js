@@ -2,7 +2,7 @@ const { getFlagFromByte, parserPackageComponents } = require("./common");
 module.exports.parse = function (buffer) {
   let [statusByte, voltageByte, signalByte] = parserPackageComponents(
     buffer,
-    [1, 1, 1]
+    [1, 1, 1, 2]
   );
 
   return {
