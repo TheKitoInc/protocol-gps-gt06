@@ -1,5 +1,5 @@
 const { getFlagFromByte, parserPackageComponents } = require("./common");
-module.exports.parseHeartbeat = function (buffer) {
+module.exports.parse = function (buffer) {
   let [statusByte, voltageByte, signalByte] = parserPackageComponents(
     buffer,
     [1, 1, 1]
