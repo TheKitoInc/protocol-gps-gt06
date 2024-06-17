@@ -6,7 +6,9 @@ module.exports.parse = function (buffer) {
   let [imei, type, tz] = parserPackageComponents(buffer, [8, 2, 2]);
 
   return {
-    type:"packageLogin",
+    typeName:"Login",
+    typeId: "01",
+    
     imei: imei.toString("hex"),
     type: type.readUInt16BE(),
     timeZone: getTimeZone(tz),
