@@ -10,7 +10,9 @@ module.exports.parse = function (buffer) {
   );
 
   return {
-    type:"packageHeartbeat",
+    typeName:"Heartbeat",
+    typeId: "13",
+
     batteryVoltage: voltageByte.readUInt8(),
     cellularSignal: signalByte.readUInt8(),
     status: statusParser.parse(statusByte),
