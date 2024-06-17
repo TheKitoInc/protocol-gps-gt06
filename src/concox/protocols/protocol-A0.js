@@ -32,3 +32,7 @@ module.exports.parse = function (buffer) {
     mileage: mileage.readUInt32BE(),
   };
 };
+
+module.exports.response = function () {
+  return Buffer.alloc(0);
+};
