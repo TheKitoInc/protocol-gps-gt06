@@ -1,6 +1,6 @@
 //Protocol Ask Time
 
-const dateTime = require("../dateTime");
+const dateTime = require("../tables/dateTime");
 
 module.exports.parse = function (buffer) {};
 
