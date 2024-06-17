@@ -33,3 +33,7 @@ module.exports.parse = function (buffer) {
     cellularSignal: cellularSignal.readUInt8(),
   };
 };
+
+module.exports.response = function () {
+  return Buffer.alloc(0);
+};
