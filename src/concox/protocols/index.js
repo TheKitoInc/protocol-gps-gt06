@@ -4,6 +4,7 @@ const alarm = require("./protocol-A4");
 const location = require("./protocol-A0");
 const transfer = require("./protocol-94");
 const multibase = require("./protocol-A1");
+const askTime = require("./protocol-8A");
 
 const protocolLogin = Buffer.from([0x01]);
 const protocolHeartbeat = Buffer.from([0x13]);
@@ -11,6 +12,7 @@ const protocolAlarm = Buffer.from([0xa4]);
 const protocolLocation = Buffer.from([0xa0]);
 const protocolTransfer = Buffer.from([0x94]);
 const protocolMultiBase = Buffer.from([0xa1]);
+const protocolAskTime = Buffer.from([0x8a]);
 
 module.exports.parse = function (buffer) {
   let protocol = buffer.subarray(0, 1);
@@ -23,7 +25,7 @@ module.exports.parse = function (buffer) {
   let response = null;
 
   if (protocolLogin.equals(protocol)) {
-    object = login.parse(package.buffer);
+    object = login.parse(buffer);
     response = login.response();
   } else if (protocolHeartbeat.equals(protocol)) {
     object = heartbeat.parse(buffer);
@@ -40,6 +42,9 @@ module.exports.parse = function (buffer) {
   } else if (protocolMultiBase.equals(protocol)) {
     object = multibase.parse(buffer);
     response = multibase.response(buffer);
+  } else if (protocolAskTime.equals(protocol)) {
+    object = askTime.parse(buffer);
+    response = askTime.response(buffer);
   } else {
     console.warn(protocol);
   }
