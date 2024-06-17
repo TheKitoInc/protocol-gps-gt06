@@ -2,7 +2,11 @@ module.exports.getFlagFromByte = function (byte, index) {
   return byte[0].toString(2).padStart(8, 0)[7 - index] == 1;
 };
 
-module.exports.parserPackageComponents = function (buffer, map) {
+module.exports.parserPackageComponents = function (
+  buffer,
+  map,
+  allowNotFullUse = false
+) {
   let output = [];
 
   map.forEach((element) => {
@@ -11,8 +15,13 @@ module.exports.parserPackageComponents = function (buffer, map) {
     output.push(value);
   });
 
-  if(buffer.length !=0)
-    exports.throwError('Map Invalid', buffer)
+  if (buffer.length != 0) {
+    if (allowNotFullUse) {
+      output.push(buffer);
+    } else {
+      exports.throwError("Map Invalid", buffer);
+    }
+  }
 
   return output;
 };
