@@ -1,5 +1,5 @@
 const { parserPackageComponents } = require("./common");
-const status = require("./tables/status");
+const statusParser = require("./tables/status");
 
 module.exports.parse = function (buffer) {
   let [statusByte, voltageByte, signalByte] = parserPackageComponents(
@@ -10,6 +10,6 @@ module.exports.parse = function (buffer) {
   return {
     batteryVoltage: voltageByte.readUInt8(),
     cellularSignal: signalByte.readUInt8(),
-    status: status.parse(statusByte),
+    status: statusParser.parse(statusByte),
   };
 };
