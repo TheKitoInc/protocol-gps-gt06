@@ -32,24 +32,4 @@ module.exports.throwError = function (message, buffer) {
   throw new Error(message + ": " + buffer.toString("hex"));
 };
 
-module.exports.parseStatusByte = function (byte) {
-  return {
-    defense: module.exports.getFlagFromByte(byte, 0),
-    acc: module.exports.getFlagFromByte(byte, 1),
-    power: module.exports.getFlagFromByte(byte, 2),
-
-    lbat:
-      module.exports.getFlagFromByte(byte, 3) &&
-      module.exports.getFlagFromByte(byte, 4),
-    powercut:
-      !module.exports.getFlagFromByte(byte, 3) &&
-      module.exports.getFlagFromByte(byte, 4),
-    vibrating:
-      module.exports.getFlagFromByte(byte, 3) &&
-      !module.exports.getFlagFromByte(byte, 4),
-
-    sos: module.exports.getFlagFromByte(byte, 5),
-    fixed: module.exports.getFlagFromByte(byte, 6),
-    cut: module.exports.getFlagFromByte(byte, 7),
-  };
 };
