@@ -16,17 +16,15 @@ module.exports.parse = function (buffer) {
   };
 };
 
-module.exports.response = function () {
+module.exports.response = function (year, month, day, hours, minutes, seconds) {
   let buffer = Buffer.alloc(6);
 
-  let date = new Date();
-
-  buffer.writeUint8(date.getUTCFullYear() - 2000, 0);
-  buffer.writeUint8(date.getUTCMonth(), 1);
-  buffer.writeUint8(date.getUTCDay(), 2);
-  buffer.writeUint8(date.getUTCHours(), 3);
-  buffer.writeUint8(date.getUTCMinutes(), 4);
-  buffer.writeUint8(date.getUTCSeconds(), 5);
+  buffer.writeUint8(year - 2000, 0);
+  buffer.writeUint8(month, 1);
+  buffer.writeUint8(day, 2);
+  buffer.writeUint8(hours, 3);
+  buffer.writeUint8(minutes, 4);
+  buffer.writeUint8(seconds, 5);
 
   return buffer;
 };
