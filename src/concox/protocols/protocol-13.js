@@ -10,11 +10,15 @@ module.exports.parse = function (buffer) {
   );
 
   return {
-    typeName:"Heartbeat",
+    typeName: "Heartbeat",
     typeId: "13",
 
     batteryVoltage: voltageByte.readUInt8(),
     cellularSignal: signalByte.readUInt8(),
     status: statusParser.parse(statusByte),
   };
+};
+
+module.exports.response = function () {
+  return Buffer.alloc(0);
 };
