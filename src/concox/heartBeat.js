@@ -1,8 +1,6 @@
-const {
-  getFlagFromByte,
-  parserPackageComponents,
-} = require("./common");
-const { parseStatusByte } = require("./tables");
+const { parserPackageComponents } = require("./common");
+const { parseStatus } = require("./tables");
+
 module.exports.parse = function (buffer) {
   let [statusByte, voltageByte, signalByte] = parserPackageComponents(
     buffer,
@@ -12,6 +10,6 @@ module.exports.parse = function (buffer) {
   return {
     batteryVoltage: voltageByte.readUInt8(),
     cellularSignal: signalByte.readUInt8(),
-    status: parseStatusByte(statusByte),
+    status: parseStatus(statusByte),
   };
 };
