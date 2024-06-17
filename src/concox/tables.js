@@ -1,6 +1,6 @@
 const { getFlagFromByte, splitBufferBytes } = require("./common");
 
-module.exports.parseStatusByte = function (buffer) {
+module.exports.parseStatus = function (buffer) {
   let byte = buffer[0];
 
   return {
