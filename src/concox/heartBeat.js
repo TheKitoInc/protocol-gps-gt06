@@ -1,8 +1,8 @@
 const {
   getFlagFromByte,
   parserPackageComponents,
-  parseStatusByte,
 } = require("./common");
+const { parseStatusByte } = require("./tables");
 module.exports.parse = function (buffer) {
   let [statusByte, voltageByte, signalByte] = parserPackageComponents(
     buffer,
