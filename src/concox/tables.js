@@ -1,7 +1,8 @@
 const { getFlagFromByte, splitBufferBytes } = require("./common");
 
 module.exports.parseStatusByte = function (buffer) {
-  byte = buffer[0];
+  let byte = buffer[0];
+
   return {
     defense: getFlagFromByte(byte, 0),
     acc: getFlagFromByte(byte, 1),
@@ -19,10 +20,11 @@ module.exports.parseStatusByte = function (buffer) {
 
 module.exports.parseCourse = function (buffer) {
   let [upperByte, lowerByte] = splitBufferBytes(buffer, 6);
-  upperByte = upperByte[0];
 
+  upperByte = upperByte[0];
   let east_west = getFlagFromByte(upperByte, 3);
   let south_north = getFlagFromByte(upperByte, 2);
+
   return {
     realTime: getFlagFromByte(upperByte, 5),
     fixed: getFlagFromByte(upperByte, 4),
@@ -31,7 +33,7 @@ module.exports.parseCourse = function (buffer) {
     north: south_north,
     east: !east_west,
     west: east_west,
-    
+
     course: lowerByte.readUInt16BE(),
   };
 };
