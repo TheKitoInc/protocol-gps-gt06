@@ -42,3 +42,7 @@ module.exports.parse = function (buffer) {
     language: language.readUInt16BE(),
   };
 };
+
+module.exports.response = function () {
+  return null;
+};
