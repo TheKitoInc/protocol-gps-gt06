@@ -1,7 +1,7 @@
 //Protocol Location
 
 const { parserPackageComponents } = require("../common");
-const dateTime = require("../dateTime");
+const dateTime = require("../tables/dateTime");
 const location = require("../tables/location");
 const cell = require("../cell");
 
