@@ -1,3 +1,5 @@
+"use strict";
+
 const { parserPackageComponents } = require("../common");
 
 module.exports.parse = function (buffer) {
@@ -7,12 +9,14 @@ module.exports.parse = function (buffer) {
   );
 
   return {
-    year: year.readUInt8() + 2000,
-    month: month.readUInt8(),
-    day: day.readUInt8(),
-    hours: hours.readUInt8(),
-    minutes: minutes.readUInt8(),
-    seconds: seconds.readUInt8(),
+    timeStamp: {
+      year: year.readUInt8() + 2000,
+      month: month.readUInt8(),
+      day: day.readUInt8(),
+      hours: hours.readUInt8(),
+      minutes: minutes.readUInt8(),
+      seconds: seconds.readUInt8(),
+    },
   };
 };
 
