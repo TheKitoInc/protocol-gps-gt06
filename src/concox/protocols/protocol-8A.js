@@ -1,4 +1,5 @@
 //Protocol Ask Time
+"use strict";
 
 const dateTime = require("../tables/dateTime");
 
