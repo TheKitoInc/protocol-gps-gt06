@@ -1,4 +1,6 @@
-const { getFlagFromByte, splitBufferBytes } = require("./../common");
+"use strict";
+
+const { getFlagFromByte } = require("./../common");
 
 module.exports.parse = function (buffer) {
   let byte = buffer[0];
@@ -8,12 +10,19 @@ module.exports.parse = function (buffer) {
     acc: getFlagFromByte(byte, 1),
     power: getFlagFromByte(byte, 2),
 
-    lbat: getFlagFromByte(byte, 3) && getFlagFromByte(byte, 4),
-    powercut: !getFlagFromByte(byte, 3) && getFlagFromByte(byte, 4),
+    lowBattery: getFlagFromByte(byte, 3) && getFlagFromByte(byte, 4),
+    powerLost: !getFlagFromByte(byte, 3) && getFlagFromByte(byte, 4),
     vibrating: getFlagFromByte(byte, 3) && !getFlagFromByte(byte, 4),
 
     sos: getFlagFromByte(byte, 5),
-    fixed: getFlagFromByte(byte, 6),
-    cut: getFlagFromByte(byte, 7),
+    stoped: getFlagFromByte(byte, 7),
+
+    gps: {
+      fixed: getFlagFromByte(byte, 6),
+    },
+
+    raw: {
+      statusTable: [byte],
+    },
   };
 };
