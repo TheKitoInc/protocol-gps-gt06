@@ -1,3 +1,5 @@
+"use strict";
+
 const packageHeaderA = Buffer.from([0x78, 0x78]);
 const packageHeaderB = Buffer.from([0x79, 0x79]);
 const packageFooter = Buffer.from([0x0d, 0x0a]);
@@ -6,7 +8,7 @@ const { crc16 } = require("easy-crc");
 const { throwError } = require("./common");
 
 const isExtendedProtocol = function (buffer) {
-  header = buffer.subarray(0, packageHeaderB.length);
+  let header = buffer.subarray(0, packageHeaderB.length);
   return packageHeaderB.equals(header);
 };
 
