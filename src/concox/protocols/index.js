@@ -1,3 +1,5 @@
+"use strict";
+
 const login = require("./protocol-01");
 const heartbeat = require("./protocol-13");
 const alarm = require("./protocol-A4");
