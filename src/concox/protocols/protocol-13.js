@@ -1,22 +1,25 @@
 //Protocol Heartbeat
+"use strict";
 
 const { parserPackageComponents } = require("../common");
 const statusParser = require("../tables/status");
+const extend = require("extend");
 
 module.exports.parse = function (buffer) {
-  let [statusByte, voltageByte, signalByte] = parserPackageComponents(
+  let [statusByte, voltageByte, signalByte, language] = parserPackageComponents(
     buffer,
     [1, 1, 1, 2]
   );
 
-  return {
-    typeName: "Heartbeat",
-    typeId: "13",
-
+  let object = {
     batteryVoltage: voltageByte.readUInt8(),
     cellularSignal: signalByte.readUInt8(),
-    status: statusParser.parse(statusByte),
+
+    raw: { heartbeat: [...voltageByte, ...signalByte, ...language] },
   };
+
+  extend(true, object, statusParser.parse(statusByte));
+  return object;
 };
 
 module.exports.response = function () {
