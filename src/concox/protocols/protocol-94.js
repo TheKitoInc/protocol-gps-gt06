@@ -11,7 +11,7 @@ module.exports.parse = function (buffer) {
       idTransfer: idTransfer,
       payload: data,
     },
-    raw: { transfer: [...idTransfer] },
+    raw: { transferProtocol: [...idTransfer] },
   };
 };
 
