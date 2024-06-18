@@ -1,37 +1,34 @@
 //Protocol Multi-fence Alarm
+"use strict";
 
 const { parserPackageComponents } = require("../common");
 const dateTime = require("../tables/dateTime");
 const location = require("../tables/location");
-const cell = require("../cell");
+const cell = require("../tables/cell");
 const status = require("../tables/status");
+const extend = require("extend");
 
 module.exports.parse = function (buffer) {
   let [dateTimeBuffer, locationBuffer, cellBufferSize, data] =
     parserPackageComponents(buffer, [6, 12, 1], true);
 
-  cellBufferSize = cellBufferSize.readUInt8();
-
-  let [cellBuffer, data2] = parserPackageComponents(
-    data,
-    [cellBufferSize - 1],
-    true
-  );
+  let cellObject = cell.parse(data);
 
   let [statusByte, voltageByte, cellularSignal, alertsBytes, fence] =
-    parserPackageComponents(data2, [1, 1, 1, 2, 1]);
+    parserPackageComponents(cell.remove(data), [1, 1, 1, 2, 1]);
 
-  return {
-    typeName: "Alarm",
-    typeId: "A4",
-
-    timeStamp: dateTime.parse(dateTimeBuffer),
-    location: location.parse(locationBuffer),
-    cell: cell.parse(cellBuffer),
-    status: status.parse(statusByte),
+  let object = {
     batteryVoltage: voltageByte.readUInt8(),
     cellularSignal: cellularSignal.readUInt8(),
   };
+
+  extend(true, object, dateTime.parse(dateTimeBuffer));
+  extend(true, object, location.parse(locationBuffer));
+  extend(true, object, cellObject);
+  extend(true, object, status.parse(statusByte));
+
+  console.log(object);
+  return object;
 };
 
 module.exports.response = function () {
