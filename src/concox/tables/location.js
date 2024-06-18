@@ -1,3 +1,5 @@
+"use strict";
+
 const { parserPackageComponents, getFlagFromByte } = require("../common");
 const courseParser = require("./course");
 
@@ -7,16 +9,20 @@ module.exports.parse = function (buffer) {
 
   let courseObject = courseParser.parse(bufferCourse);
 
+  console.warn(courseObject);
   return {
-    type:"packageLocatin",
-    satellites: satellites.readUInt8(),
-    latitude:
-      (latitude.readUInt32BE() / 1800000) * (courseObject.north ? 1 : -1),
-    longitude:
-      (longitude.readUInt32BE() / 1800000) * (courseObject.east ? 1 : -1),
-    speed: speed.readUInt8(),
-    fixed: courseObject.fixed,
-    realTime: courseObject.realTime,
-    course: courseObject.course,
+    ...courseObject,
+
+    gps: {
+      ...courseObject.gps,
+      latitude:
+        (latitude.readUInt32BE() / 1800000) *
+        (courseObject.gps.region.north ? 1 : -1),
+      longitude:
+        (longitude.readUInt32BE() / 1800000) *
+        (courseObject.gps.region.east ? 1 : -1),
+      speed: speed.readUInt8(),
+      satellites: satellites.readUInt8(),
+    },
   };
 };
