@@ -1,4 +1,5 @@
 //Protocol Login
+"use strict";
 
 const { parserPackageComponents } = require("../common");
 
@@ -6,12 +7,14 @@ module.exports.parse = function (buffer) {
   let [imei, type, tz] = parserPackageComponents(buffer, [8, 2, 2]);
 
   return {
-    typeName: "Login",
-    typeId: "01",
+    device: {
+      imei: imei.toString("hex"),
+      type: type.readUInt16BE(),
+    },
 
-    imei: imei.toString("hex"),
-    type: type.readUInt16BE(),
-    timeZone: getTimeZone(tz),
+    timeStamp: {
+      timeZone: getTimeZone(tz),
+    },
   };
 };
 
