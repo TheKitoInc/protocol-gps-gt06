@@ -1,8 +1,9 @@
 //Protocol Multibase
+"use strict";
 
 const { parserPackageComponents } = require("../common");
 const dateTime = require("../tables/dateTime");
-const cell = require("../cell");
+const cell = require("../tables/cell");
 
 module.exports.parse = function (buffer) {
   let [dateTimeBuffer, data] = parserPackageComponents(buffer, [6], true);
