@@ -2,6 +2,7 @@
 
 const { parserPackageComponents, getFlagFromByte } = require("../common");
 const courseParser = require("./course");
+const extend = require("extend");
 
 module.exports.parse = function (buffer) {
   let [satellites, latitude, longitude, speed, bufferCourse] =
@@ -9,12 +10,9 @@ module.exports.parse = function (buffer) {
 
   let courseObject = courseParser.parse(bufferCourse);
 
-  console.warn(courseObject);
-  return {
-    ...courseObject,
-
+  let object = {
     gps: {
-      ...courseObject.gps,
+      satellites: satellites.readUInt8(),
       latitude:
         (latitude.readUInt32BE() / 1800000) *
         (courseObject.gps.region.north ? 1 : -1),
@@ -22,7 +20,13 @@ module.exports.parse = function (buffer) {
         (longitude.readUInt32BE() / 1800000) *
         (courseObject.gps.region.east ? 1 : -1),
       speed: speed.readUInt8(),
-      satellites: satellites.readUInt8(),
+    },
+
+    raw: {
+      location: [...satellites, ...latitude, ...longitude, ...speed],
     },
   };
+
+  extend(true, object, courseObject);
+  return object;
 };
