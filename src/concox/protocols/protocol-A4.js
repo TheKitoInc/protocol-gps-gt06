@@ -14,12 +14,29 @@ module.exports.parse = function (buffer) {
 
   let cellObject = cell.parse(data);
 
-  let [statusByte, voltageByte, cellularSignal, alertsBytes, fence] =
-    parserPackageComponents(cell.remove(data), [1, 1, 1, 2, 1]);
+  let [statusByte, voltageByte, cellularSignal, alertType, language, fence] =
+    parserPackageComponents(cell.remove(data), [1, 1, 1, 1, 1, 1]);
 
   let object = {
-    batteryVoltage: voltageByte.readUInt8(),
-    cellularSignal: cellularSignal.readUInt8(),
+    power: {
+      voltages: {
+        battery: voltageByte.readUInt8(),
+      },
+    },
+
+    cellular: {
+      signal: cellularSignal.readUInt8(),
+    },
+    raw: {
+      MFAlarmPortocol: [
+        ...cellBufferSize,
+        ...voltageByte,
+        ...cellularSignal,
+        ...alertType,
+        ...language,
+        ...fence,
+      ],
+    },
   };
 
   extend(true, object, dateTime.parse(dateTimeBuffer));
@@ -27,7 +44,6 @@ module.exports.parse = function (buffer) {
   extend(true, object, cellObject);
   extend(true, object, status.parse(statusByte));
 
-  console.log(object);
   return object;
 };
 
