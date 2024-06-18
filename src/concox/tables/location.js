@@ -23,7 +23,7 @@ module.exports.parse = function (buffer) {
     },
 
     raw: {
-      location: [...satellites, ...latitude, ...longitude, ...speed],
+      locationTable: [...satellites, ...latitude, ...longitude, ...speed],
     },
   };
 
