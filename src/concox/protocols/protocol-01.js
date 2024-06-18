@@ -15,6 +15,8 @@ module.exports.parse = function (buffer) {
     timeStamp: {
       timeZone: getTimeZone(tz),
     },
+
+    raw: { login: [...imei, ...type, ...tz] },
   };
 };
 
