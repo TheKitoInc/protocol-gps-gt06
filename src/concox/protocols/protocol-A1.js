@@ -4,6 +4,7 @@
 const { parserPackageComponents } = require("../common");
 const dateTime = require("../tables/dateTime");
 const cell = require("../tables/cell");
+const extend = require("extend");
 
 module.exports.parse = function (buffer) {
   let [dateTimeBuffer, data] = parserPackageComponents(buffer, [6], true);
@@ -31,17 +32,22 @@ module.exports.parse = function (buffer) {
 
   let [timeAdvance, language] = parserPackageComponents(nextData, [1, 2]);
 
-  return {
-    typeName: "Multibase",
-    typeId: "A1",
+  let object = {
+    cell: { rssi: RSSI.readUInt8() },
 
-    timeStamp: dateTime.parse(dateTimeBuffer),
-    cell: cellObject,
-    RSSI: RSSI.readUInt8(),
     cells: cells,
     timeAdvance: timeAdvance.readUInt8(),
-    language: language.readUInt16BE(),
+
+    device: {
+      language: language.readUInt16BE(),
+    },
   };
+  extend(true, object, dateTime.parse(dateTimeBuffer));
+  extend(true, object, cellObject);
+
+  console.log(object);
+
+  return object;
 };
 
 module.exports.response = function () {
