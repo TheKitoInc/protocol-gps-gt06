@@ -16,7 +16,7 @@ module.exports.parse = function (buffer) {
       timeZone: getTimeZone(tz),
     },
 
-    raw: { login: [...imei, ...type, ...tz] },
+    raw: { loginProtocol: [...imei, ...type, ...tz] },
   };
 };
 
