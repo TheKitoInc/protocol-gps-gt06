@@ -15,7 +15,7 @@ module.exports.parse = function (buffer) {
     batteryVoltage: voltageByte.readUInt8(),
     cellularSignal: signalByte.readUInt8(),
 
-    raw: { heartbeat: [...voltageByte, ...signalByte, ...language] },
+    raw: { heartbeatProtocol: [...voltageByte, ...signalByte, ...language] },
   };
 
   extend(true, object, statusParser.parse(statusByte));
