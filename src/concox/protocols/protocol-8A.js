@@ -8,7 +8,7 @@ module.exports.response = function () {
   let date = new Date();
 
   return dateTime.response(
-    date.getUTCFullYear() - 2000,
+    date.getUTCFullYear() ,
     date.getUTCMonth(),
     date.getUTCDay(),
     date.getUTCHours(),
