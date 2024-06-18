@@ -23,6 +23,6 @@ module.exports.parse = function (buffer) {
         south: !south_north,
       },
     },
-    rawCourse: [upperByte, lowerByte],
+    raw: { course: [upperByte, lowerByte] },
   };
 };
