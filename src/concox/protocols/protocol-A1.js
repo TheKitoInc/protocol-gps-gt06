@@ -45,7 +45,6 @@ module.exports.parse = function (buffer) {
   extend(true, object, dateTime.parse(dateTimeBuffer));
   extend(true, object, cellObject);
 
-  console.log(object);
 
   return object;
 };
