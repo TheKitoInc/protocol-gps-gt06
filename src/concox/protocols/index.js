@@ -51,13 +51,16 @@ module.exports.parse = function (buffer) {
     console.warn(protocol);
   }
 
-  if (response !== null)
-    response = Buffer.concat([protocol, response, sequence]);
-
   return {
     protocol: protocol,
     sequence: sequence,
     object: object,
     response: response,
   };
+};
+
+module.exports.response = function (protocol, sequence, buffer = null) {
+  if (!buffer) buffer = Buffer.alloc(0);
+
+  return Buffer.concat([protocol, response, sequence]);
 };
