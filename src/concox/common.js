@@ -1,4 +1,4 @@
-const { sliceByte } = require("../../trash/tras");
+"use strict";
 
 module.exports.getFlagFromByte = function (byte, index) {
   return byte.toString(2).padStart(8, 0)[7 - index] == 1;
@@ -32,4 +32,4 @@ module.exports.throwError = function (message, buffer) {
   throw new Error(message + ": " + buffer.toString("hex"));
 };
 
-};
+
