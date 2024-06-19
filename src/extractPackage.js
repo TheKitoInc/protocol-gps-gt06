@@ -1,11 +1,21 @@
-module.exports.extractPackage = function (buffer, packageSeparator, callback) {
-  let bufferIndex = buffer.indexOf(packageSeparator);
+module.exports.extractPackage = function (
+  connectionContext,
+  packageSeparator,
+  callback
+) {
+  let bufferIndex = connectionContext.bufferInput.indexOf(packageSeparator);
 
   while (bufferIndex > -1) {
-    callback(buffer.subarray(0, bufferIndex));
+    callback(
+      Buffer.concat([
+        connectionContext.bufferInput.subarray(0, bufferIndex),
+        packageSeparator,
+      ])
+    );
 
-    buffer = buffer.subarray(bufferIndex + packageSeparator.length);
-
-    bufferIndex = buffer.indexOf(packageSeparator);
+    connectionContext.bufferInput = connectionContext.bufferInput.subarray(
+      bufferIndex + packageSeparator.length
+    );
+    bufferIndex = connectionContext.bufferInput.indexOf(packageSeparator);
   }
 };
