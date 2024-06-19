@@ -8,15 +8,15 @@ describe("login", () => {
     0x07, 0x52, 0x53, 0x36, 0x78, 0x90, 0x02, 0x42, 0x70, 0x00, 0x4d, 0xdd,
   ]);
   test("Test login package MAC", () => {
-    expect(parse(testData).imei).toStrictEqual("0752533678900242");
+    expect(parse(testData).device.imei).toStrictEqual("0752533678900242");
   });
   test("Test login package TYPE", () => {
-    expect(parse(testData).type).toStrictEqual(28672);
+    expect(parse(testData).device.type).toStrictEqual(28672);
   });
   test("Test login package TIMEZONE +", () => {
-    expect(parse(testData).timeZone).toStrictEqual(480);
+    expect(parse(testData).timeStamp.timeZone).toStrictEqual(480);
   });
   test("Test login package TIMEZONE -", () => {
-    expect(parse(testData2).timeZone).toStrictEqual(-765);
+    expect(parse(testData2).timeStamp.timeZone).toStrictEqual(-765);
   });
 });
