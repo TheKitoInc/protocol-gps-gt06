@@ -21,11 +21,12 @@ jobs:
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      # required for publishing to npm with --provenance
+      # see https://docs.npmjs.com/generating-provenance-statements
+      id-token: write    
     environment:
       name: NPM
-    permissions:
-      contents: read
-      id-token: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
