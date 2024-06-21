@@ -1,5 +1,5 @@
 {
-  "name": "@thekitoinc/protocol-gps-gt06",
+  "name": "protocol-gps-gt06",
   "version": "1.0.0",
   "description": "Binary parser for the GT06 protocol",
   "main": "index.js",
