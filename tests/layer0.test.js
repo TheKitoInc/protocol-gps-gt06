@@ -1,5 +1,5 @@
 const { randomBytes } = require("crypto");
-const { addLayer0, removeLayer0 } = require("../src/concox/layer0");
+const { addLayer0, removeLayer0 } = require("../src/layer0");
 //65534
 describe("layer0Pack", () => {
   test("Test Package", () => {
