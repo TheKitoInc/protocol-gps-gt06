@@ -1,7 +1,7 @@
 {
-  "name": "js-node-service-concox",
+  "name": "protocol-gps-gt06",
   "version": "1.0.0",
-  "description": "js-node-service-concox",
+  "description": "Binary parser for the GT06 protocol",
   "main": "src/index.js",
   "scripts": {
     "test": "jest"
@@ -10,13 +10,9 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "easy-crc": "^1.1.0",
-    "extend": "^3.0.2",
-    "minimist": "^1.2.8"
+    "extend": "^3.0.2"
   },
   "devDependencies": {
-    "console-error": "^0.0.4",
-    "console-info": "^0.0.5",
-    "console-warn": "^0.0.4",
     "jest": "^29.7.0"
   }
 }
