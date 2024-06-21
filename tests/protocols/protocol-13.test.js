@@ -1,4 +1,4 @@
-const { parse } = require("../../src/concox/protocols/protocol-13");
+const { parse } = require("../../src/protocols/protocol-13");
 
 describe("heartBeat", () => {
   let testData = Buffer.from([0x55, 0x04, 0x04, 0x00, 0x01]);
