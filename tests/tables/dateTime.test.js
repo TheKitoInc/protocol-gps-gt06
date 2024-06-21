@@ -1,4 +1,4 @@
-const { parse, response } = require("../../src/concox/tables/dateTime");
+const { parse, response } = require("../../src/tables/dateTime");
 
 describe("dateTime", () => {
   let testData = Buffer.from([0x0f, 0x0c, 0x1d, 0x02, 0x33, 0x05]);
