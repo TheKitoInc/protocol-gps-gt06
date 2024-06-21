@@ -1,4 +1,4 @@
-const { parse } = require("../../src/concox/protocols/protocol-01");
+const { parse } = require("../../src/protocols/protocol-01");
 
 describe("login", () => {
   let testData = Buffer.from([
