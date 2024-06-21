@@ -1,2 +1,2 @@
-# js-node-service-concox
-js-node-service-concox
+# protocol-gps-gt06
+Binary parser for the GT06 protocol
