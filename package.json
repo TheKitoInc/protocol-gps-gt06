@@ -1,5 +1,5 @@
 {
-  "name": "protocol-gps-gt06",
+  "name": "@thekitoinc/protocol-gps-gt06",
   "version": "1.0.0",
   "description": "Binary parser for the GT06 protocol",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TheKito/protocol-gps-gt06.git"
+    "url": "git+https://github.com/TheKitoInc/protocol-gps-gt06.git"
   },
   "keywords": [
     "protocol",
@@ -24,9 +24,9 @@
   "author": "TheKitoInc",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/TheKito/protocol-gps-gt06/issues"
+    "url": "https://github.com/TheKitoInc/protocol-gps-gt06/issues"
   },
-  "homepage": "https://github.com/TheKito/protocol-gps-gt06#readme",
+  "homepage": "https://github.com/TheKitoInc/protocol-gps-gt06#readme",
   "devDependencies": {
     "jest": "^29.7.0"
   },
