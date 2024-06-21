@@ -21,8 +21,11 @@ jobs:
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
-    environment: 
+    environment:
       name: NPM
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
