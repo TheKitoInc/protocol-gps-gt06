@@ -1,7 +1,7 @@
 "use strict";
 
-const { removeLayer0, addLayer0 } = require("./layer0");
-const protocols = require("./protocols");
+const { removeLayer0, addLayer0 } = require("./src/layer0");
+const protocols = require("./src/protocols");
 
 module.exports.parse = function (buffer) {
   return protocols.parse(removeLayer0(buffer));
