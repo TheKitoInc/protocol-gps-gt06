@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports.getFlagFromByte = function (byte, index) {
-  return byte.toString(2).padStart(8, 0)[7 - index] === 1;
+  return byte.toString(2).padStart(8, 0)[7 - index] === "1";
 };
 
 module.exports.parserPackageComponents = function (
