@@ -8,20 +8,20 @@ const cell = require("../tables/cell");
 const extend = require("extend");
 
 module.exports.parse = function (buffer) {
-  let [dateTimeBuffer, locationBuffer, data] = parserPackageComponents(
+  const [dateTimeBuffer, locationBuffer, data] = parserPackageComponents(
     buffer,
     [6, 12],
     true
   );
 
-  let cellObject = cell.parse(data);
+  const cellObject = cell.parse(data);
 
-  let [reupload, uploadmode, acc, mileage] = parserPackageComponents(
+  const [reupload, uploadmode, acc, mileage] = parserPackageComponents(
     cell.remove(data),
     [1, 1, 1, 4]
   );
 
-  let object = {
+  const object = {
     event: {
       uploadTrigger: uploadmode.readUInt8(),
     },

@@ -9,10 +9,10 @@ module.exports.parserPackageComponents = function (
   map,
   allowNotFullUse = false
 ) {
-  let output = [];
+  const output = [];
 
   map.forEach((element) => {
-    let value = buffer.subarray(0, element);
+    const value = buffer.subarray(0, element);
     buffer = buffer.subarray(element);
     output.push(value);
   });

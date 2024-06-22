@@ -9,15 +9,15 @@ const status = require("../tables/status");
 const extend = require("extend");
 
 module.exports.parse = function (buffer) {
-  let [dateTimeBuffer, locationBuffer, cellBufferSize, data] =
+  const [dateTimeBuffer, locationBuffer, cellBufferSize, data] =
     parserPackageComponents(buffer, [6, 12, 1], true);
 
-  let cellObject = cell.parse(data);
+  const cellObject = cell.parse(data);
 
-  let [statusByte, voltageByte, cellularSignal, alertType, language, fence] =
+  const [statusByte, voltageByte, cellularSignal, alertType, language, fence] =
     parserPackageComponents(cell.remove(data), [1, 1, 1, 1, 1, 1]);
 
-  let object = {
+  const object = {
     power: {
       voltages: {
         battery: voltageByte.readUInt8(),

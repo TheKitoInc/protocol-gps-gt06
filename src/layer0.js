@@ -8,12 +8,12 @@ const { crc16 } = require("easy-crc");
 const { throwError } = require("./common");
 
 const isExtendedProtocol = function (buffer) {
-  let header = buffer.subarray(0, packageHeaderB.length);
+  const header = buffer.subarray(0, packageHeaderB.length);
   return packageHeaderB.equals(header);
 };
 
 const extractFooter = function (buffer) {
-  let footer = buffer.subarray(-packageFooter.length);
+  const footer = buffer.subarray(-packageFooter.length);
 
   if (!packageFooter.equals(footer)) {
     throwError("Invalid packageFooter", buffer);
@@ -39,7 +39,7 @@ const extractHeader = function (buffer) {
 };
 
 const extractChecksum = function (buffer) {
-  let checksum = buffer.subarray(-2);
+  const checksum = buffer.subarray(-2);
   buffer = buffer.subarray(0, -2);
 
   if (!calcChecksum(buffer).equals(checksum)) {
@@ -50,7 +50,7 @@ const extractChecksum = function (buffer) {
 };
 
 const calcChecksum = function (data) {
-  let buffer = Buffer.alloc(2);
+  const buffer = Buffer.alloc(2);
   buffer.writeUInt16BE(crc16("X-25", data));
   return buffer;
 };
@@ -58,7 +58,7 @@ const calcChecksum = function (data) {
 
 
 module.exports.removeLayer0 = function (buffer) {
-  let extendedProtocol = isExtendedProtocol(buffer);
+  const extendedProtocol = isExtendedProtocol(buffer);
   buffer = extractHeader(buffer);
   buffer = extractFooter(buffer);
   buffer = extractChecksum(buffer);
@@ -83,7 +83,7 @@ module.exports.removeLayer0 = function (buffer) {
 module.exports.addLayer0 = function (buffer) {
   let header = null;
   let size = null;
-  let sizeInt = buffer.length + 2; // +2 (CRC16)
+  const sizeInt = buffer.length + 2; // +2 (CRC16)
 
   if (sizeInt < 256) {
     header = packageHeaderA;
@@ -96,7 +96,7 @@ module.exports.addLayer0 = function (buffer) {
   }
 
   buffer = Buffer.concat([size, buffer]);
-  let checksum = calcChecksum(buffer);
+  const checksum = calcChecksum(buffer);
 
   return Buffer.concat([header, buffer, checksum, packageFooter]);
 };

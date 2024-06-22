@@ -4,7 +4,7 @@
 const { parserPackageComponents } = require("../common");
 
 module.exports.parse = function (buffer) {
-  let [idTransfer, data] = parserPackageComponents(buffer, [1], true);
+  const [idTransfer, data] = parserPackageComponents(buffer, [1], true);
 
   return {
     transfer: {

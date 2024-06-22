@@ -3,12 +3,12 @@
 const { parserPackageComponents } = require("../common");
 
 module.exports.parse = function (buffer) {
-  let [mcc, data] = parserPackageComponents(buffer, [2], true);
+  const [mcc, data] = parserPackageComponents(buffer, [2], true);
 
-  let mncSize = mcc[0] >> 7 == 1 ? 2 : 1; //check upper bit to calc mnc size
+  const mncSize = mcc[0] >> 7 == 1 ? 2 : 1; //check upper bit to calc mnc size
   mcc[0] = mcc[0] & 0x7f; //remove upper bit
 
-  let [mnc, lac, id] = parserPackageComponents(data, [mncSize, 4, 8], true);
+  const [mnc, lac, id] = parserPackageComponents(data, [mncSize, 4, 8], true);
 
   return {
     cell: {
@@ -21,8 +21,8 @@ module.exports.parse = function (buffer) {
 };
 
 module.exports.remove = function (buffer) {
-  let [mcc] = parserPackageComponents(buffer, [2], true);
-  let mncSize = mcc[0] >> 7 == 1 ? 2 : 1; //check upper bit to calc mnc size
+  const [mcc] = parserPackageComponents(buffer, [2], true);
+  const mncSize = mcc[0] >> 7 == 1 ? 2 : 1; //check upper bit to calc mnc size
 
   return buffer.subarray(2 + mncSize + 4 + 8);
 };

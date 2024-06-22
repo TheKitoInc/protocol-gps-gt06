@@ -6,12 +6,12 @@ const statusParser = require("../tables/status");
 const extend = require("extend");
 
 module.exports.parse = function (buffer) {
-  let [statusByte, voltageByte, signalByte, language] = parserPackageComponents(
+  const [statusByte, voltageByte, signalByte, language] = parserPackageComponents(
     buffer,
     [1, 1, 1, 2]
   );
 
-  let object = {
+  const object = {
     batteryVoltage: voltageByte.readUInt8(),
     cellularSignal: signalByte.readUInt8(),
 

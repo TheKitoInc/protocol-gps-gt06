@@ -5,7 +5,7 @@ describe("layer0Pack", () => {
   test("Test Package", () => {
     let i = 0;
     while (i < 65534) {
-      let pkg0 = randomBytes(i);
+      const pkg0 = randomBytes(i);
 
       expect(removeLayer0(addLayer0(pkg0))).toStrictEqual(pkg0);
       i = i == 0 ? 1 : i * 2;

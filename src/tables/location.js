@@ -5,12 +5,12 @@ const courseParser = require("./course");
 const extend = require("extend");
 
 module.exports.parse = function (buffer) {
-  let [satellites, latitude, longitude, speed, bufferCourse] =
+  const [satellites, latitude, longitude, speed, bufferCourse] =
     parserPackageComponents(buffer, [1, 4, 4, 1, 2]);
 
-  let courseObject = courseParser.parse(bufferCourse);
+  const courseObject = courseParser.parse(bufferCourse);
 
-  let object = {
+  const object = {
     gps: {
       satellites: satellites.readUInt8(),
       latitude:

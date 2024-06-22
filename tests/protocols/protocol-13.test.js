@@ -1,7 +1,7 @@
 const { parse } = require("../../src/protocols/protocol-13");
 
 describe("heartBeat", () => {
-  let testData = Buffer.from([0x55, 0x04, 0x04, 0x00, 0x01]);
+  const testData = Buffer.from([0x55, 0x04, 0x04, 0x00, 0x01]);
   test("Test heartBeat package batteryVoltage", () => {
     expect(parse(testData).batteryVoltage).toStrictEqual(4);
   });

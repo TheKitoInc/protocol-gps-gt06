@@ -3,13 +3,13 @@
 const { getFlagFromByte } = require("./../common");
 
 module.exports.parse = function (buffer) {
-  let upperByte = buffer[0];
-  let lowerByte = buffer[1];
+  const upperByte = buffer[0];
+  const lowerByte = buffer[1];
 
-  let course = Buffer.from([upperByte & 0x03, lowerByte]);
+  const course = Buffer.from([upperByte & 0x03, lowerByte]);
 
-  let east_west = getFlagFromByte(upperByte, 3);
-  let south_north = getFlagFromByte(upperByte, 2);
+  const east_west = getFlagFromByte(upperByte, 3);
+  const south_north = getFlagFromByte(upperByte, 2);
 
   return {
     gps: {

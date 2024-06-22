@@ -6,7 +6,7 @@ const dateTime = require("../tables/dateTime");
 module.exports.parse = function (buffer) {};
 
 module.exports.response = function () {
-  let date = new Date();
+  const date = new Date();
 
   return dateTime.response(
     date.getUTCFullYear() ,

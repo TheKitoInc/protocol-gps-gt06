@@ -3,7 +3,7 @@
 const { parserPackageComponents } = require("../common");
 
 module.exports.parse = function (buffer) {
-  let [year, month, day, hours, minutes, seconds] = parserPackageComponents(
+  const [year, month, day, hours, minutes, seconds] = parserPackageComponents(
     buffer,
     [1, 1, 1, 1, 1, 1]
   );
@@ -21,7 +21,7 @@ module.exports.parse = function (buffer) {
 };
 
 module.exports.response = function (year, month, day, hours, minutes, seconds) {
-  let buffer = Buffer.alloc(6);
+  const buffer = Buffer.alloc(6);
 
   buffer.writeUint8(year - 2000, 0);
   buffer.writeUint8(month, 1);

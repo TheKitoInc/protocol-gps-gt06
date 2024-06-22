@@ -3,7 +3,7 @@
 const { getFlagFromByte } = require("./../common");
 
 module.exports.parse = function (buffer) {
-  let byte = buffer[0];
+  const byte = buffer[0];
 
   return {
     power: {

@@ -1,7 +1,7 @@
 const { parse, response } = require("../../src/tables/dateTime");
 
 describe("dateTime", () => {
-  let testData = Buffer.from([0x0f, 0x0c, 0x1d, 0x02, 0x33, 0x05]);
+  const testData = Buffer.from([0x0f, 0x0c, 0x1d, 0x02, 0x33, 0x05]);
 
   test("Test dateTime Table year", () => {
     expect(parse(testData).timeStamp.year).toStrictEqual(2015);

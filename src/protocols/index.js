@@ -17,10 +17,10 @@ const protocolMultiBase = Buffer.from([0xa1]);
 const protocolAskTime = Buffer.from([0x8a]);
 
 module.exports.parse = function (buffer) {
-  let protocol = buffer.subarray(0, 1);
+  const protocol = buffer.subarray(0, 1);
   buffer = buffer.subarray(1);
 
-  let sequence = buffer.subarray(-2);
+  const sequence = buffer.subarray(-2);
   buffer = buffer.subarray(0, -2);
 
   let object = null;
