@@ -34,9 +34,9 @@
   },
   "homepage": "https://github.com/TheKitoInc/protocol-gps-gt06#readme",
   "devDependencies": {
-    "@vercel/ncc": "^0.38.1",
-    "jest": "^29.7.0",
     "lynt": "^0.5.5",
+    "jest": "^29.7.0",
+    "@vercel/ncc": "^0.38.1"
   },
   "dependencies": {
     "easy-crc": "^1.1.0",
