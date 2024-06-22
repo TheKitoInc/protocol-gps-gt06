@@ -3,20 +3,7 @@ on:
   release:
     types: [created]
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm install
-      - run: npm test
-      - run: npm ci
-
-  # publish to npm
-  publish-npm:
-    needs: build
+  publish:
     runs-on: ubuntu-latest
     permissions:
       # required for publishing to npm with --provenance
@@ -30,6 +17,14 @@ jobs:
         with:
           node-version: "lts/*"
           registry-url: https://registry.npmjs.org/
-      - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - run: npm install
+      - run: npm ci --ignore-scripts
+      - run: npm run linter:cd
+      - run: npm run test:cd
+      - run: npm run build:cd
+      - run: cp LICENSE dist/LICENSE
+      - run: cp README.md dist/README.md
+      - run: jq 'del(.devDependencies) | del(.scripts)' package.json > dist/package.json
+#      - run: npm publish --provenance --access public ./build
+#        env:
+#          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
