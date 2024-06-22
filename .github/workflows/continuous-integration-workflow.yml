@@ -36,3 +36,6 @@ jobs:
           node-version: "lts/*"
       - run: npm ci --ignore-scripts
       - run: npm run build:ci
+      - run: cp LICENSE build/LICENSE
+      - run: cp README.md build/README.md
+      - run: jq 'del(.devDependencies) | del(.scripts)' package.json > build/package.json
