@@ -1,3 +1,4 @@
+const { describe, test, expect } = require("@jest/globals"); 
 const { parse } = require("../../src/protocols/protocol-01");
 
 describe("login", () => {

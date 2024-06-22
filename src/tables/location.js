@@ -1,6 +1,6 @@
 "use strict";
 
-const { parserPackageComponents, getFlagFromByte } = require("../common");
+const { parserPackageComponents } = require("../common");
 const courseParser = require("./course");
 const extend = require("extend");
 

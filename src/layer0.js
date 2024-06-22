@@ -73,7 +73,7 @@ module.exports.removeLayer0 = function (buffer) {
   }
 
   size = size - 2; // -2 CRC16
-  if (buffer.length != size) {
+  if (buffer.length !== size) {
     throwError("Invalid packageSize", buffer);
   }
 

@@ -31,7 +31,7 @@ module.exports.parse = function (buffer) {
     },
 
     gps: {
-      realTime: reupload[0] == 0,
+      realTime: reupload[0] === 0,
       mileage: mileage.readUInt32BE(),
     },
 

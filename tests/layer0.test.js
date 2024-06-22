@@ -1,5 +1,7 @@
+const { describe, test, expect } = require("@jest/globals"); 
 const { randomBytes } = require("crypto");
 const { addLayer0, removeLayer0 } = require("../src/layer0");
+
 //65534
 describe("layer0Pack", () => {
   test("Test Package", () => {
@@ -8,7 +10,7 @@ describe("layer0Pack", () => {
       const pkg0 = randomBytes(i);
 
       expect(removeLayer0(addLayer0(pkg0))).toStrictEqual(pkg0);
-      i = i == 0 ? 1 : i * 2;
+      i = i === 0 ? 1 : i * 2;
     }
   });
 });

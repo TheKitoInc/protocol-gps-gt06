@@ -26,8 +26,7 @@ function getTimeZone(buffer) {
   const timeBytes = Buffer.from("0" + buffer.slice(0, 3), "hex");
   const timeInt = timeBytes.readUInt16BE();
   const timeString = timeInt.toString();
-  const timeMinutes =
-    parseInt(timeString.slice(0, -2)) * 60 + parseInt(timeString.slice(-2));
+  const timeMinutes = parseInt(timeString.slice(0, -2)) * 60 + parseInt(timeString.slice(-2));
 
   const byteFlags = Buffer.from("0" + buffer.slice(3, 4), "hex");
 
