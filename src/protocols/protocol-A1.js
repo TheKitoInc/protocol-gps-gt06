@@ -7,18 +7,20 @@ const cell = require("../tables/cell");
 const extend = require("extend");
 
 module.exports.parse = function (buffer) {
-  const [dateTimeBuffer, data] = parserPackageComponents(buffer, [6], true);
+  let [dateTimeBuffer, RSSI] = [null, null];
 
-  const cellObject = cell.parse(data);
+  [dateTimeBuffer, buffer] = parserPackageComponents(buffer, [6], true);
 
-  let [RSSI, nextData] = parserPackageComponents(cell.remove(data), [1], true);
+  const cellObject = cell.parse(buffer);
+
+  [RSSI, buffer] = parserPackageComponents(cell.remove(buffer), [1], true);
 
   let [NLAC, NCI, NRSSI] = [null, null, null];
 
   const cells = [];
   for (let i = 0; i < 6; i++) {
-    [NLAC, NCI, NRSSI, nextData] = parserPackageComponents(
-      nextData,
+    [NLAC, NCI, NRSSI, buffer] = parserPackageComponents(
+      buffer,
       [4, 8, 1],
       true
     );
@@ -30,7 +32,7 @@ module.exports.parse = function (buffer) {
     });
   }
 
-  const [timeAdvance, language] = parserPackageComponents(nextData, [1, 2]);
+  const [timeAdvance, language] = parserPackageComponents(buffer, [1, 2]);
 
   const object = {
     cell: { rssi: RSSI.readUInt8() },
@@ -44,7 +46,6 @@ module.exports.parse = function (buffer) {
   };
   extend(true, object, dateTime.parse(dateTimeBuffer));
   extend(true, object, cellObject);
-
 
   return object;
 };
