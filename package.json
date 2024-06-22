@@ -8,10 +8,10 @@
   },
   "scripts": {
     "test": "jest",
-    "lint:cd": "lynt",
+    "linter:cd": "lynt",
     "test:cd": "jest",
     "build:cd": "npm i && ncc build index.js --minify ",
-    "lint:ci": "lynt",
+    "linter:ci": "lynt",
     "test:ci": "jest",
     "build:ci": "npm i && ncc build index.js --minify "
   },
