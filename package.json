@@ -13,7 +13,7 @@
     "build:cd": "npm i && ncc build index.js --minify ",
     "lint:ci": "lynt",
     "test:ci": "jest",
-    "build:ci": "npm i && ncc build index.js --minify ",
+    "build:ci": "npm i && ncc build index.js --minify "
   },
   "repository": {
     "type": "git",
