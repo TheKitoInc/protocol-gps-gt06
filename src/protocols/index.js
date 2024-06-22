@@ -62,5 +62,5 @@ module.exports.parse = function (buffer) {
 module.exports.response = function (protocol, sequence, buffer = null) {
   if (!buffer) buffer = Buffer.alloc(0);
 
-  return Buffer.concat([protocol, response, sequence]);
+  return Buffer.concat([protocol, buffer, sequence]);
 };
