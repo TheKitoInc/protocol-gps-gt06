@@ -24,7 +24,7 @@ Start with cloning this repo on your local machine:
 
 ```sh
 $ git clone https://github.com/TheKitoInc/protocol-gps-gt06.git
-$ cd protocol-gps-gt0
+$ cd protocol-gps-gt06
 ```
 
 To install and set up the library, run:
