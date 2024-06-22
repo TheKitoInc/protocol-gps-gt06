@@ -10,10 +10,10 @@
     "test": "jest",
     "linter:cd": "lynt",
     "test:cd": "jest",
-    "build:cd": "npm i && ncc index.js --minify ",
+    "build:cd": "ncc build index.js --minify ",
     "linter:ci": "lynt",
     "test:ci": "jest",
-    "build:ci": "npm i && ncc index.js --minify "
+    "build:ci": "ncc build index.js --minify "
   },
   "repository": {
     "type": "git",
