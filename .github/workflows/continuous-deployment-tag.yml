@@ -2,7 +2,7 @@ name: CD-Tag
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - package.json
 
@@ -16,4 +16,3 @@ jobs:
 
       - name: Create Tag
         uses: neverendingqs/gh-action-tag-on-npm-version@v1.0.1
-
