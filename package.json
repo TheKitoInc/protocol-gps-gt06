@@ -1,6 +1,6 @@
 {
   "name": "protocol-gps-gt06",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Binary parser for the GT06 protocol",
   "main": "index.js",
   "directories": {
