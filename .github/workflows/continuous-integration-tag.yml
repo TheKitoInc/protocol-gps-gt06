@@ -9,6 +9,7 @@ on:
 jobs:
   tag:
     name: CI-Tag
+
     runs-on: ubuntu-latest
 
     permissions:
