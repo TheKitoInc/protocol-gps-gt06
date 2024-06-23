@@ -20,7 +20,6 @@ jobs:
         with:
           node-version: "lts/*"
           registry-url: https://registry.npmjs.org/
-      - run: npm install
       - run: npm ci --ignore-scripts
       - run: npm run linter:cd
       - run: npm run test:cd
@@ -31,3 +30,6 @@ jobs:
 #      - run: npm publish --provenance --access public ./build
 #        env:
 #          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+      - name: Install
+        run: npm install
