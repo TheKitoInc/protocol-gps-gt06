@@ -1,4 +1,4 @@
-name: CD
+name: CD-NPMJS
 on:
   release:
     types: [created]
@@ -12,8 +12,11 @@ jobs:
     environment:
       name: NPM
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: "lts/*"
           registry-url: https://registry.npmjs.org/
