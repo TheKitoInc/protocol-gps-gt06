@@ -3,3 +3,5 @@ tmp
 .php-cs-fixer.cache
 node_modules
 /log
+/dist
+package-lock.json
