@@ -20,9 +20,6 @@ jobs:
         with:
           node-version: "lts/*"
           registry-url: https://registry.npmjs.org/
-      - run: cp LICENSE dist/LICENSE
-      - run: cp README.md dist/README.md
-      - run: jq 'del(.devDependencies) | del(.scripts)' package.json > dist/package.json
 #      - run: npm publish --provenance --access public ./build
 #        env:
 #          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
@@ -41,3 +38,9 @@ jobs:
 
       - name: CD-Build
         run: npm run build:cd
+
+      - name: Packaging
+        run: |
+          cp LICENSE dist/LICENSE
+          cp README.md dist/README.md
+          jq 'del(.devDependencies) | del(.scripts)' package.json > dist/package.json
