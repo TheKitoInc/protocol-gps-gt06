@@ -2,6 +2,7 @@ name: CD-NPMJS
 on:
   release:
     types: [created]
+
 jobs:
   publish:
     runs-on: ubuntu-latest
