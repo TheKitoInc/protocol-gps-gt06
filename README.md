@@ -54,7 +54,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **The Kito Inc** - *Initial work* - [TheKitoInc](https://github.com/TheKitoInc)
+- **The Kito Inc** - _Initial work_ - [TheKitoInc](https://github.com/TheKitoInc)
 
 See also the list of [contributors](https://github.com/TheKitoInc/protocol-gps-gt06/contributors) who participated in this project.
 
