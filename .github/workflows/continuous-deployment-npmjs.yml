@@ -44,7 +44,6 @@ jobs:
           jq 'del(.devDependencies) | del(.scripts)' package.json > dist/package.json
 
       - name: Publish
-        #      - run: npm publish --provenance --access public ./build
-        run: npm publish --provenance --access public
+        run: npm publish --provenance --access public ./build
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
