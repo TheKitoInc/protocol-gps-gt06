@@ -20,7 +20,6 @@ jobs:
         with:
           node-version: "lts/*"
           registry-url: https://registry.npmjs.org/
-#      - run: npm publish --provenance --access public ./build
 
       - name: Install
         run: npm install
@@ -42,5 +41,9 @@ jobs:
           cp LICENSE dist/LICENSE
           cp README.md dist/README.md
           jq 'del(.devDependencies) | del(.scripts)' package.json > dist/package.json
+
+      - name: Publish
+        #      - run: npm publish --provenance --access public ./build
+        run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
