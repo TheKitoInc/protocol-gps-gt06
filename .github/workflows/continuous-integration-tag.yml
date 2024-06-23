@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - package.json
+    #paths:
+    #- package.json
 
 jobs:
   tag:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Create Tag
         uses: neverendingqs/gh-action-tag-on-npm-version@v1.0.1
