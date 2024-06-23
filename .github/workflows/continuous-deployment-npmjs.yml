@@ -20,7 +20,6 @@ jobs:
         with:
           node-version: "lts/*"
           registry-url: https://registry.npmjs.org/
-      - run: npm run test:cd
       - run: npm run build:cd
       - run: cp LICENSE dist/LICENSE
       - run: cp README.md dist/README.md
@@ -37,3 +36,6 @@ jobs:
 
       - name: CD-Linter
         run: npm run linter:cd
+
+      - name: CD-Test
+        run: npm run test:cd
