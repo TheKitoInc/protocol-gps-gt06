@@ -3,13 +3,15 @@
 
 const dateTime = require("../tables/dateTime");
 
-module.exports.parse = function (buffer) {};
+module.exports.parse = function (buffer) {
+  return {};
+};
 
 module.exports.response = function () {
   const date = new Date();
 
   return dateTime.response(
-    date.getUTCFullYear() ,
+    date.getUTCFullYear(),
     date.getUTCMonth(),
     date.getUTCDay(),
     date.getUTCHours(),
