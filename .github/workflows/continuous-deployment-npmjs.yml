@@ -20,7 +20,6 @@ jobs:
         with:
           node-version: "lts/*"
           registry-url: https://registry.npmjs.org/
-      - run: npm run build:cd
       - run: cp LICENSE dist/LICENSE
       - run: cp README.md dist/README.md
       - run: jq 'del(.devDependencies) | del(.scripts)' package.json > dist/package.json
@@ -39,3 +38,6 @@ jobs:
 
       - name: CD-Test
         run: npm run test:cd
+
+      - name: CD-Build
+        run: npm run build:cd
