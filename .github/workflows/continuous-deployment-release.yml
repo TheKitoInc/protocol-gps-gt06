@@ -31,13 +31,13 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: CD-Linter
-        run: npm run linter:cd
+        run: npm run linter
 
       - name: CD-Test
-        run: npm run test:cd
+        run: npm run test
 
       - name: CD-Build
-        run: npm run build:cd
+        run: npm run build
 
       - name: Packaging
         run: |
