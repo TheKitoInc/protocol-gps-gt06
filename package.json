@@ -1,6 +1,6 @@
 {
   "name": "protocol-gps-gt06",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Binary parser for the GT06 protocol",
   "main": "index.js",
   "directories": {
@@ -9,14 +9,7 @@
   "scripts": {
     "test": "jest",
     "linter": "lynt",
-    "build": "ncc build index.js --minify -e easy-crc -e extend",
-    "linter:cd": "lynt",
-    "test:cd": "jest",
-    "build:cd": "ncc build index.js --minify ",
-    "linter:ci": "lynt",
-    "test:ci": "jest",
-    "build:ci": "ncc build index.js --minify -e easy-crc -e extend",
-    "build:release": "ncc build index.js --minify -e easy-crc -e extend"
+    "build": "ncc build index.js --minify -e easy-crc -e extend"
   },
   "repository": {
     "type": "git",
