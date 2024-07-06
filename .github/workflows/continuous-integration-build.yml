@@ -26,3 +26,9 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Packaging
+        run: |
+          cp LICENSE dist/LICENSE
+          cp README.md dist/README.md
+          jq 'del(.devDependencies) | del(.scripts)' package.json > dist/package.json
