@@ -8,6 +8,8 @@
   },
   "scripts": {
     "test": "jest",
+    "linter": "lynt",
+    "build": "ncc build index.js --minify -e easy-crc -e extend",
     "linter:cd": "lynt",
     "test:cd": "jest",
     "build:cd": "ncc build index.js --minify ",
