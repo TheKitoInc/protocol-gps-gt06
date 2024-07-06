@@ -2,7 +2,7 @@ name: CI-Test
 on: [push, pull_request]
 
 jobs:
-  linter:
+  test:
     name: CI-Test
 
     runs-on: ubuntu-latest
@@ -13,7 +13,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
+      - name: Setup
         uses: actions/setup-node@v4
         with:
           node-version: "lts/*"
