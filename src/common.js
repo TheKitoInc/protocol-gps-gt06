@@ -31,5 +31,3 @@ module.exports.parserPackageComponents = function (
 module.exports.throwError = function (message, buffer) {
   throw new Error(message + ": " + buffer.toString("hex"));
 };
-
-

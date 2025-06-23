@@ -55,8 +55,6 @@ const calcChecksum = function (data) {
   return buffer;
 };
 
-
-
 module.exports.removeLayer0 = function (buffer) {
   const extendedProtocol = isExtendedProtocol(buffer);
   buffer = extractHeader(buffer);
