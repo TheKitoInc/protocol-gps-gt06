@@ -46,4 +46,4 @@ jobs:
           jq 'del(.devDependencies) | del(.scripts)' package.json > dist/package.json
 
       - name: Release
-        uses: justincy/github-action-npm-release@2.0.2
+        uses: TheKitoInc/github-action-npm-release@master
